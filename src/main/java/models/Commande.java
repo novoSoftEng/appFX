@@ -9,7 +9,7 @@ public class Commande {
 
   public Date dateCommande;
 
-    public Client client;
+
     /**
     * 
     *

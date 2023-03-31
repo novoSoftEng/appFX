@@ -12,4 +12,5 @@ module com.example.appfx {
     exports com.example.appfx;
     exports controllers;
     opens controllers to javafx.fxml;
+    opens models to javafx.base;
 }
