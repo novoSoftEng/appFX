@@ -73,13 +73,31 @@ public class ClientDAO extends  BaseDAO<Client> {
         this.resultSet =  this.statement.executeQuery(req);
 
         while (this.resultSet.next()){
-
+            Long id= this.resultSet.getLong(1);
             mylist.add( new Client(this.resultSet.getLong(1) , this.resultSet.getString(2),
-                    this.resultSet.getString(3),this.resultSet.getString(3) ));
+                    this.resultSet.getString(3),this.resultSet.getString(4)));
 
 
         }
         return mylist;
 
+    }
+    public List<Credit> getCredit( Client object) throws SQLException {
+        List<Credit> mylist = new ArrayList<Credit>();
+        String req = " select * from Credit WHERE id_client = ?" ;
+
+        this.preparedStatement = this.connection.prepareStatement(req);
+
+        this.preparedStatement.setLong(1 , object.getId_client());
+        this.resultSet =  this.preparedStatement.executeQuery();
+
+        while (this.resultSet.next()){
+
+            mylist.add( new Credit(this.resultSet.getLong(1),this.resultSet.getLong(2) , this.resultSet.getDouble(3),
+                    this.resultSet.getDate(4),this.resultSet.getBoolean(5) ));
+
+
+        }
+        return mylist;
     }
 }

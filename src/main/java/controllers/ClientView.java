@@ -1,28 +1,38 @@
 package controllers;
 
+import com.example.appfx.HelloApplication;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import models.Client;
 import models.ClientDAO;
+import models.Credit;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
+
 public class ClientView implements Initializable {
 
     @FXML
-    private TextField nom;
+    protected TextField nom;
     @FXML
-    private TextField prenom;
+    protected TextField prenom;
 
     @FXML
-    private TextField tele;
+    protected TextField tele;
+    protected static Client client_choisit;
 
 
     @FXML
@@ -40,7 +50,18 @@ public class ClientView implements Initializable {
     private TableColumn<Client, String> col_tele;
     @FXML
     public TableColumn<Client,Client> col_delete;
+    @FXML
+    public TableColumn<Client,Client> col_update;
+    @FXML
+    public TableColumn<Credit,Double> col_credit;
 
+    public static Client getClient_choisit() {
+        return client_choisit;
+    }
+
+    public static void setClient_choisit(Client client_choisit) {
+        ClientView.client_choisit = client_choisit;
+    }
 
     @FXML
     protected void onSaveButtonClick(){
@@ -75,7 +96,10 @@ public class ClientView implements Initializable {
         col_nom.setCellValueFactory(new PropertyValueFactory<Client,String>("nom"));
         col_prenom.setCellValueFactory(new PropertyValueFactory<Client,String>("prenom"));
         col_tele.setCellValueFactory(new PropertyValueFactory<Client,String>("NumTelephone"));
+       // col_credit.setCellValueFactory(new PropertyValueFactory<Credit,Double>("SumCredit"));
+
         col_delete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+
         col_delete.setCellFactory(param -> new TableCell<Client,Client>() {
             private final Button deleteButton = new Button("Delete");
             @Override
@@ -97,6 +121,41 @@ public class ClientView implements Initializable {
                                 new ClientDAO().delete(client);
                                 UpdateTable();
                             } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                );
+            }
+
+        });
+        col_update.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        col_update.setCellFactory(param -> new TableCell<Client,Client>() {
+            private final Button updateButton = new Button("Update");
+            @Override
+            protected void updateItem(Client client, boolean empty) {
+                super.updateItem(client, empty);
+
+                if (client== null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(updateButton);
+
+
+                updateButton.setOnAction(
+
+                        event -> {
+                            client_choisit=client;
+                            Scene scene = updateButton.getScene();
+                            Window window = scene.getWindow();
+                            Stage stage = (Stage) window;
+                            FXMLLoader fxmlLoader=  new FXMLLoader(ClientView.class.getResource("/com/example/appfx/ClientViewUpdate.fxml"));
+                            try {
+                               Scene scene1= new Scene(fxmlLoader.load());
+                                stage.setScene(scene1);
+                                stage.show();
+                            } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }

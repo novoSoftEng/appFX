@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Client {
 
   Long id_client;
@@ -7,9 +9,17 @@ public class Client {
 
   public String prenom;
   public String NumTelephone;
+  public List<Credit> listCredit;
 
   public String nom() {
     return nom;
+  }
+  public Client(String nom , String prenom , String NumTelephone, List<Credit> list) {
+
+    this.nom = nom;
+    this.prenom=prenom;
+    this.NumTelephone=NumTelephone;
+    listCredit=list;
   }
 
   public Client(String nom , String prenom , String NumTelephone) {
