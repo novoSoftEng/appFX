@@ -1,10 +1,20 @@
 package models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Credit {
     Long id_credit;
     Long id_client;
+
+    public Long getId_client() {
+        return id_client;
+    }
+
+    public void setId_client(Long id_client) {
+        this.id_client = id_client;
+    }
+
     double montant;
     Date DateCredit;
     Boolean etat;
@@ -17,8 +27,9 @@ public class Credit {
         this.etat=etat;
     }
 
-    public Credit( double montant ,Date dateCredit, Boolean etat ) {
-        DateCredit = dateCredit;
+    public Credit(Long id_client, double montant , LocalDate dateCredit, Boolean etat ) {
+        this.id_client=id_client;
+        DateCredit = Date.valueOf(dateCredit);
         this.montant=montant;
         this.etat=etat;
     }

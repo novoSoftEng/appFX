@@ -14,6 +14,8 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+    <Label text="ID Client" />
+    <TextField fx:id="id_client"/>
    <Label text="Monatant" />
    <TextField fx:id="montant"/>
    <Label text="Date Credit" />
@@ -25,9 +27,10 @@
     <TableView fx:id="mytab" prefHeight="200.0" prefWidth="200.0">
         <columns>
             <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="col_nom" prefWidth="75.0" text="Montant" />
-            <TableColumn fx:id="col_prenom" prefWidth="75.0" text="Date Credit" />
-            <TableColumn fx:id="col_tele" prefWidth="75.0" text="Etat" />
+            <TableColumn fx:id="col_client" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="col_montant" prefWidth="75.0" text="Montant" />
+            <TableColumn fx:id="col_date" prefWidth="75.0" text="Date Credit" />
+            <TableColumn fx:id="col_etat" prefWidth="75.0" text="Etat" />
             <TableColumn fx:id="col_delete" prefWidth="75.0" text="Delete" />
             <TableColumn fx:id="col_update" prefWidth="75.0" text="Update" />
         </columns>

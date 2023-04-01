@@ -11,14 +11,14 @@ public class CreditDAO extends BaseDAO<Credit>{
 
     @Override
     public void save(Credit object) throws SQLException {
-        String req = "insert into Credit (montant, DateCredit , etat) values (?,? , ?) ;";
+        String req = "insert into Credit (id_client,montant, DateCredit , etat) values (?,?,? , ?) ;";
 
 
         this.preparedStatement = this.connection.prepareStatement(req);
-
-        this.preparedStatement.setDouble(1 , object.getMontant());
-        this.preparedStatement.setDate(2 , object.getDateCredit());
-        this.preparedStatement.setBoolean(3 , object.getEtat());
+        this.preparedStatement.setDouble(1 , object.getId_client());
+        this.preparedStatement.setDouble(2 , object.getMontant());
+        this.preparedStatement.setDate(3 , object.getDateCredit());
+        this.preparedStatement.setBoolean(4 , object.getEtat());
 
 
         this.preparedStatement.execute();
