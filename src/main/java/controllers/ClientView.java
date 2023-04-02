@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 public class ClientView implements Initializable {
 
     @FXML
+    private TableColumn<Client,Client> col_credit_details;
+    @FXML
     protected TextField nom;
     @FXML
     protected TextField prenom;
@@ -116,9 +118,44 @@ public class ClientView implements Initializable {
             }
 
         });
+        col_credit_details.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        col_credit_details.setCellFactory(param -> new TableCell<Client,Client>() {
+            private final Button detailsButton = new Button("Details");
+            @Override
+            protected void updateItem(Client client, boolean empty) {
+                super.updateItem(client, empty);
 
+                if (client== null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(detailsButton);
+
+
+                detailsButton.setOnAction(
+
+                        event -> {
+                            client_choisit=client;
+                            Scene scene = detailsButton.getScene();
+                            Window window = scene.getWindow();
+                            Stage stage = (Stage) window;
+                            FXMLLoader fxmlLoader=  new FXMLLoader(ClientView.class.getResource("/com/example/appfx/ClientCreditView.fxml"));
+                            try {
+                                Scene scene1= new Scene(fxmlLoader.load());
+                                stage.setScene(scene1);
+                                stage.show();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                );
+            }
+
+        });
 
         col_delete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+
 
         col_delete.setCellFactory(param -> new TableCell<Client,Client>() {
             private final Button deleteButton = new Button("Delete");

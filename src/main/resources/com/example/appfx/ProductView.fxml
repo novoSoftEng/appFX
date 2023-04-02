@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductController" >
+<padding>
+<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+</padding>
+    <fx:include source="TopView.fxml"/>
+<Label text="Nom Produit" />
+<TextField fx:id="nom" />
+<Label text="fornisseur" />
+<TextField fx:id="fornisseur" />
+
+
+<Button fx:id="ok" onAction="#onSaveButtonClick" text="Save!" />
+<TableView fx:id="mytab" prefHeight="200.0" prefWidth="200.0">
+<columns>
+    <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
+    <TableColumn fx:id="col_nom" prefWidth="75.0" text="Nom PRODUIT" />
+    <TableColumn fx:id="col_fornisseur" prefWidth="75.0" text="Fornisseur" />
+    <TableColumn fx:id="col_delete" prefWidth="75.0" text="Delete" />
+    <TableColumn fx:id="col_update" prefWidth="75.0" text="Update" />
+</columns>
+</TableView>
+        </VBox>

@@ -26,7 +26,7 @@ public class CreditController implements Initializable {
     @FXML
     public DatePicker DateCredit;
     @FXML
-    private TableView<Credit> mytab;
+    protected TableView<Credit> mytab;
     @FXML
     public ChoiceBox etat;
     @FXML
@@ -40,9 +40,9 @@ public class CreditController implements Initializable {
     @FXML
     public TableColumn<Credit,Boolean> col_etat;
     @FXML
-    private TableColumn<Credit,Credit> col_delete;
+    protected TableColumn<Credit,Credit> col_delete;
     @FXML
-    private TableColumn<Credit,Credit> col_update;
+    protected TableColumn<Credit,Credit> col_update;
     public Boolean getChoice(){
        String valeur= (String) etat.getValue();
         if (Objects.equals(valeur, "True"))

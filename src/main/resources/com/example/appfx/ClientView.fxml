@@ -25,7 +25,8 @@
             <TableColumn fx:id="col_tele" prefWidth="75.0" text="Tele" />
             <TableColumn fx:id="col_delete" prefWidth="75.0" text="Delete" />
             <TableColumn fx:id="col_update" prefWidth="75.0" text="Update" />
-            <TableColumn fx:id="col_credit" prefWidth="75.0" text="Credit" />
+            <TableColumn fx:id="col_credit" prefWidth="80.0" text="Credit" />
+            <TableColumn fx:id="col_credit_details" prefWidth="80.0" text="Credit Details" />
         </columns>
     </TableView>
 </VBox>

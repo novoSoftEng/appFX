@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+
+<HBox  xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TopController">
+   <children>
+      <Button mnemonicParsing="false" text="Home" fx:id="home"/>
+      <Button mnemonicParsing="false" text="Client" fx:id="client" />
+      <Button mnemonicParsing="false" text="Produit" fx:id="produit"/>
+      <Button mnemonicParsing="false" text="Credit" fx:id="credit"/>
+      <Button mnemonicParsing="false" text="Commande" fx:id="commande"/>
+   </children>
+</HBox>
