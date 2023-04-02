@@ -1,6 +1,6 @@
 package models;
 
-import java.util.List;
+
 
 public class Client {
 
@@ -9,19 +9,28 @@ public class Client {
 
   public String prenom;
   public String NumTelephone;
-  public List<Credit> listCredit;
+
+  Double CreditTotal;
+
+  public Double getCreditTotal() {
+    return CreditTotal;
+  }
+
+  public void setCreditTotal(Double creditTotal) {
+    CreditTotal = creditTotal;
+  }
 
   public String nom() {
     return nom;
   }
-  public Client(String nom , String prenom , String NumTelephone, List<Credit> list) {
+
+  public Client(String nom , String prenom , String NumTelephone, Double CreditTotal) {
 
     this.nom = nom;
     this.prenom=prenom;
     this.NumTelephone=NumTelephone;
-    listCredit=list;
+    this.CreditTotal=CreditTotal;
   }
-
   public Client(String nom , String prenom , String NumTelephone) {
 
     this.nom = nom;

@@ -100,14 +100,17 @@ public class ClientDAO extends  BaseDAO<Client> {
         }
         return mylist;
     }
-    public double getCreditTotal(Client object) throws SQLException {
+    public Double getCreditTotal(Client object) throws SQLException {
         String req="SELECT SUM(montant) FROM Credit WHERE id_client=?";
         this.preparedStatement = this.connection.prepareStatement(req);
 
         this.preparedStatement.setLong(1 , object.getId_client());
 
+    this.resultSet=this.preparedStatement.executeQuery();
+    if((this.resultSet.next()))
+        return this.resultSet.getDouble(1);
+    else return null;
 
 
-        return this.preparedStatement.executeQuery().getDouble(1);
     }
 }

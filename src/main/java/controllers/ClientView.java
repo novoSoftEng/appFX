@@ -1,12 +1,14 @@
 package controllers;
 
 import com.example.appfx.HelloApplication;
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,11 +17,13 @@ import javafx.stage.Window;
 import models.Client;
 import models.ClientDAO;
 import models.Credit;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 
 
 
@@ -53,7 +57,7 @@ public class ClientView implements Initializable {
     @FXML
     public TableColumn<Client,Client> col_update;
     @FXML
-    public TableColumn<Credit,Double> col_credit;
+    public TableColumn<Client,Double> col_credit;
 
     public static Client getClient_choisit() {
         return client_choisit;
@@ -96,7 +100,23 @@ public class ClientView implements Initializable {
         col_nom.setCellValueFactory(new PropertyValueFactory<Client,String>("nom"));
         col_prenom.setCellValueFactory(new PropertyValueFactory<Client,String>("prenom"));
         col_tele.setCellValueFactory(new PropertyValueFactory<Client,String>("NumTelephone"));
-       // col_credit.setCellValueFactory(new PropertyValueFactory<Credit,Double>("SumCredit"));
+        col_credit.setCellValueFactory(celldata->{
+            ClientDAO clientDAO= null;
+            try {
+                clientDAO = new ClientDAO();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+
+              double creditTotal=  clientDAO.getCreditTotal(celldata.getValue());
+                return (ObservableValue<Double>) new SimpleDoubleProperty(creditTotal).asObject();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
 
         col_delete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
