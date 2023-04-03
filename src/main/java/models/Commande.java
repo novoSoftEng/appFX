@@ -1,22 +1,31 @@
 package models;
 
-import models.Client;
-
 import java.sql.Date;
+import java.time.LocalDate;
 
 
 public class Commande {
   Long id_commande;
 
-  public Commande(Long id_client,Date dateCommande) {
+  public Commande(Long id_client, Date dateCommande) {
     this.id_client = id_client;
-    this.dateCommande=dateCommande;
+    this.dateCommande= dateCommande;
   }
   public Commande(Long id_commande,Long id_client,Date dateCommande) {
     this.id_commande=id_commande;
     this.id_client = id_client;
     this.dateCommande=dateCommande;
   }
+  public Commande(Long id_commande,Long id_client,LocalDate dateCommande) {
+    this.id_commande=id_commande;
+    this.id_client = id_client;
+    this.dateCommande=Date.valueOf(dateCommande);
+  }
+  public Commande(Long id_client, LocalDate dateCommande) {
+    this.id_client = id_client;
+    this.dateCommande=Date.valueOf(dateCommande) ;
+  }
+
 
   public Long getId_commande() {
     return id_commande;

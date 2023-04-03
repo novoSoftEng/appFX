@@ -10,6 +10,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        setUserAgentStylesheet(STYLESHEET_MODENA);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Index.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
         stage.setTitle("javaFX Project!");
