@@ -7,6 +7,7 @@
 
 <?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.productViewUpdate">
+    <fx:include source="TopView.fxml"/>
     <children>
         <Label alignment="CENTER" prefHeight="53.0" prefWidth="241.0" text="Modifier le Produit " />
         <VBox layoutX="88.0" layoutY="61.0" prefHeight="331.0" prefWidth="425.0" alignment="CENTER">
