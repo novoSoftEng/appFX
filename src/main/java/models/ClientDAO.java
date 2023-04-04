@@ -9,6 +9,23 @@ public class ClientDAO extends  BaseDAO<Client> {
 
         super();
     }
+    public List<Commande> getCommande( Client object) throws SQLException {
+        List<Commande> mylist = new ArrayList<Commande>();
+        String req = " select * from Commande WHERE id_client = ?" ;
+
+        this.preparedStatement = this.connection.prepareStatement(req);
+
+        this.preparedStatement.setLong(1 , object.getId_client());
+        this.resultSet =  this.preparedStatement.executeQuery();
+
+        while (this.resultSet.next()){
+
+            mylist.add( new Commande(this.resultSet.getLong(1),this.resultSet.getLong(2),this.resultSet.getDate(3) ));
+
+
+        }
+        return mylist;
+    }
 
     @Override
     public void save(Client object) throws SQLException {
@@ -44,7 +61,14 @@ public class ClientDAO extends  BaseDAO<Client> {
     @Override
     public void delete(Client object) throws SQLException {
         String req = " DELETE FROM Client WHERE id_client=?;";
+        List<Commande> list = new ArrayList<Commande>();
+        CommandeDAO commandeDAO= new CommandeDAO();
 
+        list=getCommande(object);
+        for (Commande commande:
+             list) {
+            commandeDAO.delete(commande);
+        }
 
         this.preparedStatement = this.connection.prepareStatement(req);
 

@@ -6,22 +6,26 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ClientViewUpdate">
-    <fx:include source="TopView.fxml"/>
-    <children>
-        <Label prefHeight="53.0" prefWidth="241.0" text="Modifier le Client " />
-        <VBox layoutX="88.0" layoutY="61.0" prefHeight="331.0" prefWidth="425.0" alignment="CENTER">
+
+
+
+        <VBox xmlns:fx="http://javafx.com/fxml/1" layoutX="88.0" layoutY="61.0" prefHeight="331.0" prefWidth="425.0"
+              alignment="CENTER" xmlns="http://javafx.com/javafx/20"
+              fx:controller="controllers.ClientViewUpdate">
             <children>
+                <fx:include source="TopView.fxml"/>
+                <Label prefHeight="53.0" prefWidth="241.0" text="Modifier le Client " />
+
                 <Label text="Prenom" />
                 <TextField fx:id="prenom" />
                 <Label text="Nom" />
                 <TextField fx:id="nom" />
                 <Label text="Telephone :" />
                 <TextField fx:id="tele" />
+                <Button fx:id="ok" onAction="#onUpdateButtonClick" text="Save!" />
+            </children>
+        </VBox>
 
-            </children></VBox>
 
-    </children>
-    <Button fx:id="ok" onAction="#onUpdateButtonClick" text="Save!" />
-</AnchorPane>
+
 

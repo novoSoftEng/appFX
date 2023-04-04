@@ -16,7 +16,7 @@ public class UserDAO extends BaseDAO<User>{
         this.preparedStatement.setString(2 , object.getMotdepasse());
 
 
-        return this.preparedStatement.execute();
+        return this.preparedStatement.executeQuery().next();
     }
 
     @Override

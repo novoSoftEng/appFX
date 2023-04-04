@@ -23,7 +23,7 @@
     <ChoiceBox prefWidth="150.0" fx:id="etat"/>
 
 
-    <Button fx:id="ok" onAction="#onSaveButtonClick" text="Save!" />
+    <Button fx:id="ok" onAction="#onUpdateButtonClick" text="Save!" />
     </VBox>
 
 </AnchorPane>

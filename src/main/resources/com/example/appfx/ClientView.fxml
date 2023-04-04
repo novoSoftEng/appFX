@@ -22,12 +22,12 @@
         <columns>
             <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="col_nom" prefWidth="75.0" text="Nom" />
-            <TableColumn fx:id="col_prenom" prefWidth="75.0" text="prenom" />
-            <TableColumn fx:id="col_tele" prefWidth="75.0" text="Tele" />
-            <TableColumn fx:id="col_delete" prefWidth="75.0" text="Delete" />
-            <TableColumn fx:id="col_update" prefWidth="75.0" text="Update" />
+            <TableColumn fx:id="col_prenom" prefWidth="90.0" text="prenom" />
+            <TableColumn fx:id="col_tele" prefWidth="90.0" text="Tele" />
+            <TableColumn fx:id="col_delete" prefWidth="90.0" text="Delete" />
+            <TableColumn fx:id="col_update" prefWidth="90.0" text="Update" />
             <TableColumn fx:id="col_credit" prefWidth="80.0" text="Credit" />
-            <TableColumn fx:id="col_credit_details" prefWidth="80.0" text="Credit Details" />
+            <TableColumn fx:id="col_credit_details" prefWidth="120.0" text="Credit Details" />
         </columns>
     </TableView>
 </VBox>

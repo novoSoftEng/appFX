@@ -4,13 +4,18 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import models.Client;
 import models.Credit;
 import models.CreditDAO;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
@@ -18,6 +23,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CreditController implements Initializable {
+    static Credit credit_choisit;
 
     @FXML
     public TextField montant;
@@ -45,9 +51,9 @@ public class CreditController implements Initializable {
     protected TableColumn<Credit,Credit> col_update;
     public Boolean getChoice(){
        String valeur= (String) etat.getValue();
-        if (Objects.equals(valeur, "True"))
+        if (Objects.equals(valeur, "Payés"))
             return Boolean.TRUE;
-        else if (Objects.equals(valeur, "False")) {
+        else if (Objects.equals(valeur, "Non Payés")) {
             return Boolean.FALSE;
         }
         else return Boolean.FALSE;
@@ -55,7 +61,7 @@ public class CreditController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    etat.setItems(FXCollections.observableArrayList("True","False"));
+    etat.setItems(FXCollections.observableArrayList("Payés","Non Payés"));
         UpdateTable();
 
     }
@@ -90,6 +96,7 @@ public class CreditController implements Initializable {
         col_montant.setCellValueFactory(new PropertyValueFactory<Credit,Double>("montant"));
         col_date.setCellValueFactory(new PropertyValueFactory<Credit,Date>("DateCredit"));
         col_etat.setCellValueFactory(new PropertyValueFactory<Credit,Boolean>("etat"));
+        col_update.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
         col_delete.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 
         col_delete.setCellFactory(param -> new TableCell<Credit,Credit>() {
@@ -113,6 +120,40 @@ public class CreditController implements Initializable {
                                 new CreditDAO().delete(credit);
                                 UpdateTable();
                             } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                );
+            }
+
+        });
+        col_update.setCellFactory(param -> new TableCell<Credit,Credit>() {
+            private final Button updateButton = new Button("Update");
+            @Override
+            protected void updateItem(Credit credit, boolean empty) {
+                super.updateItem(credit, empty);
+
+                if (credit== null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(updateButton);
+
+
+                updateButton.setOnAction(
+
+                        event -> {
+                            credit_choisit=credit;
+                            Scene scene = updateButton.getScene();
+                            Window window = scene.getWindow();
+                            Stage stage = (Stage) window;
+                            FXMLLoader fxmlLoader=  new FXMLLoader(CreditController.class.getResource("/com/example/appfx/CreditViewUpdate.fxml"));
+                            try {
+                                Scene scene1= new Scene(fxmlLoader.load());
+                                stage.setScene(scene1);
+                                stage.show();
+                            } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
                         }
